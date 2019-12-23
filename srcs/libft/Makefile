@@ -17,7 +17,7 @@ FILE_O=$(FILE:.c=.o)
 BONUS_FILE_O=$(BONUS_FILE:.c=.o)
 
 $(NAME) :
-	${CC} -c ${FLAGS} ${FILE}
+	${CC} -c  ${FILE}
 	ar rc libft.a $(FILE_O)
 clean :
 	${DEL} ${FILE_O} ${BONUS_FILE_O}
@@ -26,6 +26,10 @@ fclean : clean
 	${DEL} ${NAME}
 
 re : fclean all
+
+so :
+	gcc -c *.c
+	gcc -fPIC *.o -o libft.so
 
 bonus :
 	${CC} -c ${FLAGS} ${FILE} ${BONUS_FILE}
