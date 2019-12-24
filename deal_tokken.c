@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   deal_tokken.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/23 16:55:19 by djulian           #+#    #+#             */
-/*   Updated: 2019/12/24 12:17:59 by djulian          ###   ########.fr       */
+/*   Created: 2019/12/24 12:01:33 by djulian           #+#    #+#             */
+/*   Updated: 2019/12/24 15:28:33 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int main(void)
+char	*tokkens_precision(int precision_number, char *value)
 {
-	ft_printf ("jespere c pas cassez : %---12.213w\n", "Hello world");
-	printf ("jespere c pas cassez : <%.0s>\n", "Hello");
-	return (1);
+	if (precision_number > ft_strlen(value))
+		return (value);
+	else if (precision_number == 0)
+		return (value)
+	
+}
+
+char    *read_tokkens_struct(s_tokken *tokkens, char *value, va_list arg)
+{
+	int i;
+
+	i = 0;
+	if (tokkens->precision == 1)
+		value = tokkens_precision(tokkens->precision_number, value);
+	return(value); 
 }

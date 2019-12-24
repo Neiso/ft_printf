@@ -6,7 +6,7 @@
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:50:07 by douatla           #+#    #+#             */
-/*   Updated: 2019/12/23 16:50:06 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/24 10:51:29 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include "srcs/libft/libft.h"
+
+typedef struct s_tokken
+{
+    int     adjustment;
+    int     left; //if == 0 so its adjust right
+    int     precision;
+    int     precision_number;
+    int     asterix;
+    int     error;
+}               s_tokken;
 
 /*
 **      ===================
@@ -84,6 +94,10 @@ char	*ft_itoa_base16(unsigned int n);
 /*
 **-------------------------------------------------------------------
 */
+
+s_tokken    *fill_tokken_struct(s_tokken *tokkens, const char *string, int flags);
+s_tokken    *init_tokken(s_tokken *tokkens);
+void        print_tokken(s_tokken *tokkens);
 
 //https://www.hackerearth.com/practice/notes/know-our-printf-variable-number-of-arguments-to-a-function/
 #endif

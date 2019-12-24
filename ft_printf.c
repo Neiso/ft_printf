@@ -6,7 +6,7 @@
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:45:00 by douatla           #+#    #+#             */
-/*   Updated: 2019/12/23 13:10:12 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/24 11:52:39 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int		ft_printf(const char *string, ...)
 	while (string[i] != '\0')
 	{
 		if (string[i] == '%' && deal_with_arg(&string[i], list_arg))
-			i++;
+			{
+				while (string[i] != '\0' && (string[i] <= 97 || string[i] >= 122) && string[i] != 88)
+					i++;
+			}
 		else if (string[i] == '%' && string[++i] != '\0')
 			write(1, &string[i], 1);
 		else 
