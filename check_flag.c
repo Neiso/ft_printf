@@ -6,13 +6,13 @@
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 10:56:54 by djulian           #+#    #+#             */
-/*   Updated: 2019/12/24 11:47:41 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/26 13:40:56 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int (*flag_list[8])(const char *string, va_list list_arg) =
+int (*flag_list[8])(const char *string, va_list list_arg, s_tokken tokkens) =
 {
 	character_arg,
 	string_arg,
@@ -67,8 +67,11 @@ int    deal_with_arg(const char *string, va_list list_arg)
 		fill_tokken_struct(&tokkens, string, flag);
 		// print_tokken(&tokkens);
 		if (tokkens.error != 0)
+		{
+			write(1, &pourcent, 1);
 			return (0);
-		flag_list[flag](string, list_arg);
+		}
+		flag_list[flag](string, list_arg, tokkens);
 	}
 	else if (flag == -1)
     {

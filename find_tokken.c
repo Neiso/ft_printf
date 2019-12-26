@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokken.c                                           :+:      :+:    :+:   */
+/*   find_tokken.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 09:05:24 by djulian           #+#    #+#             */
-/*   Updated: 2019/12/24 11:58:46 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/26 13:20:14 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ s_tokken    *fill_tokken_struct(s_tokken *tokkens, const char *string, int flags
 
 	i = 1;
 	flag = FLAG[flags];
-	if (string[1] == '-')
+	while (string[i] == '-')
 	{
 		tokkens->left = 1;
 		i++;

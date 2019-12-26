@@ -6,13 +6,13 @@
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:45:56 by djulian           #+#    #+#             */
-/*   Updated: 2019/12/23 16:56:15 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/26 10:47:22 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		pointer_arg(const char* string, va_list list_arg)
+int		pointer_arg(const char* string, va_list list_arg, s_tokken tokkens)
 {
 	unsigned int value;
 	char *value_string;
