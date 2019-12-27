@@ -6,7 +6,7 @@
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:55:19 by djulian           #+#    #+#             */
-/*   Updated: 2019/12/26 14:50:41 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/27 12:49:59 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(void)
 {
-	ft_printf("ft_printf output : <%-2.6x>\n", 150);
-	printf   ("   printf output : <%-2.6x>\n", 150);
+	ft_printf("ft_printf output : <%-2.5x>\n", 150);
+	printf   ("   printf output : <%-2.5x>\n", 150);
 	return (1);
 }

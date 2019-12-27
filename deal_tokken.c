@@ -6,7 +6,7 @@
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 12:01:33 by djulian           #+#    #+#             */
-/*   Updated: 2019/12/26 13:58:17 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/27 13:19:33 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 char	*tokkens_adjustement_left(int adjustement, char *value)
 {
 	int i;
+	int len;
 
+	len = (int)ft_strlen(value);
 	char *value_copy;
-	if (adjustement <= ft_strlen(value))
+	if (adjustement <= len)
 		return(value);
 	value_copy = ft_strdup(value);
 	if (!(value = (char*)malloc(adjustement + 1)))
 		return (NULL);
-	ft_strlcpy(value, value_copy, ft_strlen(value_copy) + 1);
-	i = ft_strlen(value_copy) - 1;
+	ft_strlcpy(value, value_copy, len + 1);
+	i = len - 1;
 	while (++i < adjustement)
 		value[i] = ' ';
 	value[i] = '\0';
@@ -33,15 +35,17 @@ char	*tokkens_adjustement_left(int adjustement, char *value)
 char	*tokkens_adjustement_right(int adjustement, char *value)
 {
 	int i;
+	int len;
 
+	len = (int)ft_strlen(value);
 	char *value_copy;
-	if (adjustement <= ft_strlen(value))
+	if (adjustement <= len)
 		return(value);
 	value_copy = ft_strdup(value);
 	if (!(value = (char*)malloc(adjustement + 1)))
 		return (NULL);
 	i = -1;
-	while(++i < (adjustement - ft_strlen(value_copy)))
+	while(++i < (adjustement - len))
 		value[i] = ' ';
 	value[i] = '\0';
 	ft_strlcat(value, value_copy, adjustement + 1);
@@ -51,7 +55,7 @@ char	*tokkens_adjustement_right(int adjustement, char *value)
 
 char	*tokken_precision_string(int precision_number, char *value)
 {
-	if (precision_number > ft_strlen(value))
+	if (precision_number > (int)ft_strlen(value))
 		return (value);
 	return (ft_substr((const char*)value, 0, precision_number));
 }
@@ -77,9 +81,8 @@ char	*tokken_precision_int(int precision_number, char *value)
 
 char    *read_tokkens_struct(s_tokken *tokkens, char *value, va_list arg, int flag)
 {
-	int i;
-
-	i = 0;
+	if (value[0] == 'Y') //cest de la merde
+		arg = arg + 1;
 	if (tokkens->precision == 1 && flag == STRING)
 		value = tokken_precision_string(tokkens->precision_number, value);
 	if (tokkens->precision == 1 && flag == DECIMAL_D)

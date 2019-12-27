@@ -6,16 +6,22 @@ FILES = utils.c find_tokken.c deal_tokken.c check_flag.c  type_of_flag.c type_of
 
 HEADER = ft_printf.h
 
-NAME = ft_printf
+EXEC = ft_printf
 
-all: ${NAME}
-	echo 'done'
+NAME = libftprintf.a
+
+DEL = rm -Rf
+
+all : ${NAME}
+
 ${NAME}:
-	gcc -o ${NAME} ${HEADER} ${LIBFT} ${FILES}
+	${GCC} -L -o ${FILES}
+	ar rc ${NAME} ${FILES_O}
 
-ubuntu :
-	gcc -o ${NAME} ${HEADER} libft.so ${FILES} ./srcs/libft/*.o
+clean :
+	${DEL} *.o
 
-re: all
+fclean : clean
+	${DEL} ${NAME}
 
-
+re : fclean all
