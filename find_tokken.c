@@ -6,7 +6,7 @@
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 09:05:24 by djulian           #+#    #+#             */
-/*   Updated: 2019/12/26 13:20:14 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/28 11:17:58 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void        print_tokken(s_tokken *tokkens)
 	printf("%d\n", tokkens->precision);
 	printf("%d\n", tokkens->precision_number);
 	printf("%d\n", tokkens->asterix);
-	printf("%d\n", tokkens->error);  
+	printf("%d\n", tokkens->error);
+	printf("\n");
 }
 
 s_tokken    *init_tokken(s_tokken *tokkens)

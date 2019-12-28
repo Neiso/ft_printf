@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   func_utiles.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 13:26:48 by djulian           #+#    #+#             */
-/*   Updated: 2019/12/27 13:28:07 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/27 16:50:33 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,10 @@ char	*ft_itoa_base16(unsigned int n)
 		i--;
 	}
 	return (string);
+}
+
+void	count_character_for_return (s_tokken *tokkens, char *value)
+{
+	if (tokkens->adjustment == 0)
+		tokkens->adjustment = ft_strlen(value);
 }

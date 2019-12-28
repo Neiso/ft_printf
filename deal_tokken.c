@@ -6,7 +6,7 @@
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 12:01:33 by djulian           #+#    #+#             */
-/*   Updated: 2019/12/27 13:19:33 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/27 18:22:26 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char    *read_tokkens_struct(s_tokken *tokkens, char *value, va_list arg, int fl
 		arg = arg + 1;
 	if (tokkens->precision == 1 && flag == STRING)
 		value = tokken_precision_string(tokkens->precision_number, value);
-	if (tokkens->precision == 1 && flag == DECIMAL_D)
+	if (tokkens->precision == 1 && flag == INT_D)
 		value = tokken_precision_int(tokkens->precision_number, value);
 	if (tokkens->adjustment > 0 && tokkens->left == 0)
 		value = tokkens_adjustement_right(tokkens->adjustment, value);

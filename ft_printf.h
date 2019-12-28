@@ -6,7 +6,7 @@
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:50:07 by douatla           #+#    #+#             */
-/*   Updated: 2019/12/26 13:41:57 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/28 11:21:05 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 # include "srcs/libft/libft.h"
 # define CHARACTER 0
 # define STRING 1
-# define DECIMAL_I 2
-# define DECIMAL_D 3
-# define UNSI_INT 4
-# define HEXA_x 5
-# define HEXA_X 6
+# define POINTER 2
+# define INT_D 3
+# define INT_I 4
+# define UNSI_INT 5
+# define HEXA_x 6
+# define HEXA_X 7
 
 typedef struct s_tokken
 {
@@ -67,11 +68,11 @@ int 		type_of_arg(const char *str);
 **      ======================
 */
 
-int     character_arg(const char* string, va_list list_arg, s_tokken tokkens);
-int     string_arg(const char* string, va_list list_arg, s_tokken tokkens);
-int     int_decimal_arg(const char* string, va_list list_arg, s_tokken tokkens);
-int     unsigned_int_decimal_arg(const char* string, va_list list_arg, s_tokken tokkens);
-int     unsigned_hexadecimal_arg(const char* string, va_list list_arg, s_tokken tokkens);
+int     character_arg(const char* string, va_list list_arg, s_tokken *tokkens);
+int     string_arg(const char* string, va_list list_arg, s_tokken *tokkens);
+int     int_decimal_arg(const char* string, va_list list_arg, s_tokken *tokkens);
+int     unsigned_int_decimal_arg(const char* string, va_list list_arg, s_tokken *tokkens);
+int     unsigned_hexadecimal_arg(const char* string, va_list list_arg, s_tokken *tokkens);
 
 /*
 **-------------------------------------------------------------------
@@ -87,7 +88,7 @@ int     unsigned_hexadecimal_arg(const char* string, va_list list_arg, s_tokken 
 **-------------------------------------------------------------------
 */
 
-int     pointer_arg(const char* string, va_list list_arg, s_tokken tokkens);
+int     pointer_arg(const char* string, va_list list_arg, s_tokken *tokkens);
 
 /*
 **      ===============
@@ -107,6 +108,9 @@ s_tokken    *init_tokken(s_tokken *tokkens);
 void        print_tokken(s_tokken *tokkens);
 char    *read_tokkens_struct(s_tokken *tokkens, char *value, va_list arg, int flag);
 char	*tokkens_precision(int precision_number, char *value);
+void	count_character_for_return (s_tokken *tokkens, char *value);
+int		find_minus_sign(const char *string, int index);
+
 
 
 //https://www.hackerearth.com/practice/notes/know-our-printf-variable-number-of-arguments-to-a-function/
