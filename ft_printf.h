@@ -6,7 +6,7 @@
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:50:07 by douatla           #+#    #+#             */
-/*   Updated: 2019/12/28 11:21:05 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/30 11:06:32 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,10 @@ void        print_tokken(s_tokken *tokkens);
 char    *read_tokkens_struct(s_tokken *tokkens, char *value, va_list arg, int flag);
 char	*tokkens_precision(int precision_number, char *value);
 void	count_character_for_return (s_tokken *tokkens, char *value);
-int		find_minus_sign(const char *string, int index);
+int		find_minus_sign(const char *string, int index, int *ret);
+int		find_pourcent_sign(const char *string, int index);
+
+
 
 
 

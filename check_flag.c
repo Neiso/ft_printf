@@ -6,7 +6,7 @@
 /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 10:56:54 by djulian           #+#    #+#             */
-/*   Updated: 2019/12/28 10:59:10 by djulian          ###   ########.fr       */
+/*   Updated: 2019/12/30 11:34:16 by djulian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int    deal_with_arg(const char *string, va_list list_arg)
 		fill_tokken_struct(&tokkens, string, flag);
 		if (tokkens.error != 0)
 		{
-			write(1, &pourcent, 1);
+			// write(1, &pourcent, 1);
 			return (0);
 		}
 		flag_list[flag](string, list_arg, &tokkens);
