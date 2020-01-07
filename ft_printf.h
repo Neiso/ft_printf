@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:50:07 by douatla           #+#    #+#             */
-/*   Updated: 2019/12/30 11:06:32 by djulian          ###   ########.fr       */
+/*   Updated: 2020/01/07 17:01:05 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define UNSI_INT 5
 # define HEXA_x 6
 # define HEXA_X 7
+# define POURCENT 8
+# define EMPTY_STRING -1
 
 typedef struct s_tokken
 {
@@ -33,6 +35,8 @@ typedef struct s_tokken
     int     precision_number;
     int     asterix;
     int     error;
+    int     empty_string;
+    int     precision_zero_string;
 }               s_tokken;
 
 /*
@@ -89,6 +93,7 @@ int     unsigned_hexadecimal_arg(const char* string, va_list list_arg, s_tokken 
 */
 
 int     pointer_arg(const char* string, va_list list_arg, s_tokken *tokkens);
+int		pourcent_arg(const char* string, va_list list_arg, s_tokken *tokkens);
 
 /*
 **      ===============

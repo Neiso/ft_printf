@@ -1,24 +1,24 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   main.c                                             :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2019/12/23 16:55:19 by djulian           #+#    #+#             */
-// /*   Updated: 2019/12/30 12:31:36 by djulian          ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/23 16:55:19 by djulian           #+#    #+#             */
+/*   Updated: 2020/01/07 17:20:38 by douatla          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// #include "ft_printf.h"
+#include "ft_printf.h"
 
-// int main(void)
-// {
-// 	int ret = 0;
-// 	int ret2 = 0;
+int main(void)
+{
+	int ret = 0;
+	int ret2 = 0;
+	static char *s_hidden = "hi low\0don't print me lol\0";
 
-// 	ret = ft_printf("ft_printf output : %x\n", 42);
-// 	ret2 = printf  ("   printf output : %x\n", 42);
-// 	// ft_printf("ret ft_printf : %d\nret printf : %d\n", ret, ret2);
-// 	return (ret);
-// }
+	ft_printf("<%09s>\n", s_hidden);
+	printf("<%09s>\n", s_hidden);
+	return (ret);
+}
