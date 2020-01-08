@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 13:26:45 by douatla           #+#    #+#             */
-/*   Updated: 2020/01/07 16:20:56 by douatla          ###   ########.fr       */
+/*   Updated: 2020/01/08 14:19:59 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int		string_arg(const char* string, va_list list_arg, s_tokken *tokkens)
 	value = va_arg(list_arg, char*);
 	if (value == NULL)
 		value = "(null)";
-	if (ft_strlen(value) == 0)
-		tokkens->empty_string = 1;
+	else if (ft_strlen(value) == 0)
+		tokkens->string_tokken.empty_string = 1;
 	value = read_tokkens_struct(tokkens, value, list_arg, STRING);
 	count_character_for_return (tokkens, value);
 	write(1, value, ft_strlen(value));

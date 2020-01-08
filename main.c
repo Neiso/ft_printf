@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:55:19 by djulian           #+#    #+#             */
-/*   Updated: 2020/01/07 17:20:38 by douatla          ###   ########.fr       */
+/*   Updated: 2020/01/08 15:21:07 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main(void)
 	int ret2 = 0;
 	static char *s_hidden = "hi low\0don't print me lol\0";
 
-	ft_printf("<%09s>\n", s_hidden);
-	printf("<%09s>\n", s_hidden);
+	ft_printf("%.6i\n", -3);
+	   printf("%.6i\n", -3);
 	return (ret);
 }

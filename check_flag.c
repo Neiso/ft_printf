@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 10:56:54 by djulian           #+#    #+#             */
-/*   Updated: 2020/01/07 17:54:22 by douatla          ###   ########.fr       */
+/*   Updated: 2020/01/08 14:29:07 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int    deal_with_arg(const char *string, va_list list_arg)
 	}
 	else if (flag == -1)
         return (0);
-	if (tokkens.empty_string)
+	if (tokkens.string_tokken.empty_string)
 		return(EMPTY_STRING);
     return (tokkens.adjustment);
 }

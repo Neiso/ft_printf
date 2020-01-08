@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:50:07 by douatla           #+#    #+#             */
-/*   Updated: 2020/01/07 17:01:05 by douatla          ###   ########.fr       */
+/*   Updated: 2020/01/08 15:09:08 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,30 @@
 # define POURCENT 8
 # define EMPTY_STRING -1
 
-typedef struct s_tokken
+typedef struct  s_tokken_int
 {
-    int     adjustment;
-    int     left; //if == 0 so its adjust right
-    int     precision;
-    int     precision_number;
-    int     asterix;
-    int     error;
-    int     empty_string;
-    int     precision_zero_string;
+	int     precision_dot;
+	int     precision_zero;
+}               s_tokken_int;
+
+typedef struct  s_tokken_string
+{
+	int empty_string;
+	int precision_zero_string;
+}               s_tokken_string;
+
+typedef struct  s_tokken
+{
+	int             adjustment;
+	int             left; //if == 0 so its adjust right
+	int             precision;
+	int             precision_number;
+	int             asterix;
+	int             error;
+	s_tokken_int    int_tokken;
+	s_tokken_string string_tokken;
 }               s_tokken;
+
 
 /*
 **      ===================

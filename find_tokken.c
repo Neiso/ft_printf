@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 09:05:24 by djulian           #+#    #+#             */
-/*   Updated: 2020/01/07 17:54:05 by douatla          ###   ########.fr       */
+/*   Updated: 2020/01/08 15:22:58 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void        print_tokken(s_tokken *tokkens)
 	printf("%d\n", tokkens->precision_number);
 	printf("%d\n", tokkens->asterix);
 	printf("%d\n", tokkens->error);
-	printf("%d\n", tokkens->empty_string);
-	printf("%d\n", tokkens->precision_zero_string);
+	printf("%d\n", tokkens->string_tokken.empty_string);
+	printf("%d\n", tokkens->string_tokken.precision_zero_string);
 	printf("\n");
 }
 
@@ -34,17 +34,25 @@ s_tokken    *init_tokken(s_tokken *tokkens)
 	tokkens->precision_number = 0;
 	tokkens->asterix = 0;
 	tokkens->error = 0;
-	tokkens->empty_string = 0;
-	tokkens->precision_zero_string = 0;
+	tokkens->string_tokken.empty_string = 0;
+	tokkens->string_tokken.precision_zero_string = 0;
+	tokkens->int_tokken.precision_dot = 0;
+	tokkens->int_tokken.precision_zero = 0;
 	return (tokkens);
 }
 
 void	string_arg_preci_zero(s_tokken *tokkens,const char *string)
 {
 	int i;
+	int tmp;
 
-	tokkens->precision_zero_string = 1;
+	tokkens->string_tokken.precision_zero_string = 1;
 	i = 2;
+	tmp = i;
+	while(string[i] != 's' && string[i] >= '0' && string[i] <= '9')
+		i++;
+	if (tmp != i)
+		tokkens->precision_number = ft_atoi(ft_substr(string, tmp, i));
 	while (string[i] != 's')
 	{
 		if (string[i] == '-')
@@ -81,7 +89,7 @@ s_tokken    *fill_tokken_struct(s_tokken *tokkens, const char *string, int flags
 			i++;
 		tokkens->precision_number = ft_atoi(ft_substr(string, tmp, i));
 	}
-	if (string[i] == '0' && (flags == STRING))
+	if (string[i] == '0' && (flags == STRING) && tokkens->left == 0)
 	{
 		string_arg_preci_zero(tokkens, string);
 		return (tokkens);
@@ -94,6 +102,8 @@ s_tokken    *fill_tokken_struct(s_tokken *tokkens, const char *string, int flags
 	{
 		if (string[i] =='.')
 		{
+			// if (flags == INT_D || flags == INT_I)			DOESNT WORK
+			// 	tokkens->int_tokken.precision_dot = 1;
 			i++;
 			tmp = i;
 			tokkens->precision = tokkens->precision + 1;
