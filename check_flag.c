@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 10:56:54 by djulian           #+#    #+#             */
-/*   Updated: 2020/01/08 14:29:07 by douatla          ###   ########.fr       */
+/*   Updated: 2020/01/29 17:38:45 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,25 @@ int    deal_with_arg(const char *string, va_list list_arg)
 {
     char pourcent;
 	int flag;
+	int ret;
 	s_tokken tokkens;
 
     pourcent = '%';
+	ret = 0;
 	flag = type_of_arg(string);
     if (flag != -1)
 	{
 		init_tokken(&tokkens);
+		tokkens.tokken = FLAG[flag];
 		fill_tokken_struct(&tokkens, string, flag);
 		// print_tokken(&tokkens);
 		if (tokkens.error != 0)
 			return (0);
 		flag_list[flag](string, list_arg, &tokkens);
-
 	}
 	else if (flag == -1)
         return (0);
-	if (tokkens.string_tokken.empty_string)
+	if (tokkens.string_tokken.empty_string && tokkens.adjustment == 0)
 		return(EMPTY_STRING);
     return (tokkens.adjustment);
 }

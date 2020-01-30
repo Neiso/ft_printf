@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func_utiles.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djulian <djulian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 13:26:48 by djulian           #+#    #+#             */
-/*   Updated: 2019/12/30 10:33:35 by djulian          ###   ########.fr       */
+/*   Updated: 2020/01/24 17:05:29 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,17 @@ int	find_pourcent_sign(const char *string, int index)
 		index++;
 	}
 	return (0);
+}
+
+char	*toupper_X(char *value_string)
+{
+	int i;
+
+	i = -1;
+	while(value_string[++i])
+	{	
+		if (value_string[i] >= 97 && value_string[i] <= 122)
+			value_string[i] -= 32;
+	}
+	return(value_string);
 }

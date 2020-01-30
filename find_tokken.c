@@ -6,12 +6,11 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 09:05:24 by djulian           #+#    #+#             */
-/*   Updated: 2020/01/08 15:22:58 by douatla          ###   ########.fr       */
+/*   Updated: 2020/01/29 16:03:46 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#define FLAG "cspdiuxX%"
 
 void        print_tokken(s_tokken *tokkens)
 {
@@ -19,8 +18,10 @@ void        print_tokken(s_tokken *tokkens)
 	printf("%d\n", tokkens->left);
 	printf("%d\n", tokkens->precision);
 	printf("%d\n", tokkens->precision_number);
+	printf("%d\n", tokkens->precision_zero);
 	printf("%d\n", tokkens->asterix);
 	printf("%d\n", tokkens->error);
+	printf("%c\n", tokkens->tokken);
 	printf("%d\n", tokkens->string_tokken.empty_string);
 	printf("%d\n", tokkens->string_tokken.precision_zero_string);
 	printf("\n");
@@ -32,33 +33,57 @@ s_tokken    *init_tokken(s_tokken *tokkens)
 	tokkens->left = 0;
 	tokkens->precision = 0;
 	tokkens->precision_number = 0;
+	tokkens->precision_zero = 0;
 	tokkens->asterix = 0;
 	tokkens->error = 0;
+	tokkens->tokken = 0;
 	tokkens->string_tokken.empty_string = 0;
 	tokkens->string_tokken.precision_zero_string = 0;
-	tokkens->int_tokken.precision_dot = 0;
-	tokkens->int_tokken.precision_zero = 0;
 	return (tokkens);
 }
 
-void	string_arg_preci_zero(s_tokken *tokkens,const char *string)
+int		string_arg_preci_zero2(s_tokken *tokkens,const char *string, int pos)
+{
+	int tmp;
+	
+	tokkens->string_tokken.precision_zero_string = 1;
+	tmp = pos;
+	while(string[pos] != 's' && string[pos] >= '0' && string[pos] <= '9')
+		pos++;
+	if (tmp != pos)
+		tokkens->precision_number = ft_atoi(ft_substr(string, tmp, pos));
+	return pos;
+}
+
+
+int		pre_fill_tokken_struct(s_tokken *tokkens, const char *string, char flag)
 {
 	int i;
 	int tmp;
 
-	tokkens->string_tokken.precision_zero_string = 1;
-	i = 2;
+	i = 1;
+	while (string[i] == '-' && ++i)
+		tokkens->left = 1;
+	if (string[i] == ' ' && ++i)
+		tokkens->adjustment = -1;
 	tmp = i;
-	while(string[i] != 's' && string[i] >= '0' && string[i] <= '9')
+	if (string[i] == '0' && string[i + 1] == '-')
 		i++;
-	if (tmp != i)
-		tokkens->precision_number = ft_atoi(ft_substr(string, tmp, i));
-	while (string[i] != 's')
+	if (string[i] == '0' && flag != 's' && tokkens->left == 0) //flag 0 ignored if flag - present ET A MODIFIER VOIR MAIB
 	{
-		if (string[i] == '-')
-			tokkens->left = 1;
-		i++;
+		tmp = ++i;
+		tokkens->precision_zero = 1;
+		while (string[i] >= '0' && string[i] <= '9' && string[i] != flag)
+			i++;
+		tokkens->precision_number = ft_atoi(ft_substr(string, tmp, i));
 	}
+	if (string[i] == '0' && flag == 's' && tokkens->left == 0)
+		i = string_arg_preci_zero2(tokkens, string, i);
+	while (string[i] != flag && string[i] >= '0' && string[i] <= '9')
+		i++;
+	if (i != 1 && tokkens->adjustment == 0)
+		tokkens->adjustment = ft_atoi(ft_substr(string, tmp, i));
+	return i;
 }
 
 s_tokken    *fill_tokken_struct(s_tokken *tokkens, const char *string, int flags)
@@ -69,63 +94,29 @@ s_tokken    *fill_tokken_struct(s_tokken *tokkens, const char *string, int flags
 
 	i = 1;
 	flag = FLAG[flags];
-	while (string[i] == '-')
-	{
-		tokkens->left = 1;
-		i++;
-	}
-	if (string[i] == ' ')
-	{
-		tokkens->adjustment = -1;
-		i++;
-	}
-	tmp = i;
-	if (string[i] == '0' && (flags == INT_D || flags == INT_I || flags == POURCENT) && tokkens->left == 0)
-	{
-		i++;
-		tmp = i;
-		tokkens->precision = tokkens->precision + 1;
-		while (string[i] >= '0' && string[i] <= '9' && string[i] != flag)
-			i++;
-		tokkens->precision_number = ft_atoi(ft_substr(string, tmp, i));
-	}
-	if (string[i] == '0' && (flags == STRING) && tokkens->left == 0)
-	{
-		string_arg_preci_zero(tokkens, string);
-		return (tokkens);
-	}
-	while (string[i] != flag && string[i] >= '0' && string[i] <= '9')
-		i++;
-	if (i != 1 && tokkens->adjustment == 0)
-		tokkens->adjustment = ft_atoi(ft_substr(string, tmp, i));
+	i = pre_fill_tokken_struct(tokkens, string, flag);
 	while (string[i] != flag) 
 	{
-		if (string[i] =='.')
+		if (string[i] == '-')
 		{
-			// if (flags == INT_D || flags == INT_I)			DOESNT WORK
-			// 	tokkens->int_tokken.precision_dot = 1;
-			i++;
-			tmp = i;
+			tmp = ++i;
+			tokkens->left = 1;
+			while (string[i] >= '0' && string[i] <= '9' && string[i] != flag)
+				i++;
+			tokkens->adjustment = ft_atoi(ft_substr(string, tmp, i));
+		}
+		if (string[i] == '.')
+		{
+			tmp = ++i;
 			tokkens->precision = tokkens->precision + 1;
 			while (string[i] >= '0' && string[i] <= '9' && string[i] != flag)
 				i++;
 			tokkens->precision_number = ft_atoi(ft_substr(string, tmp, i));
 		}
-		else if (string[i] == '*')
-			{
-				tokkens->asterix = tokkens->asterix + 1;
-				i++;
-			}
-		else if (string[i] == '-')
-			{
-				tokkens->error = 1;
-				return(tokkens);
-			}
-		else
-		{
-			tokkens->error = 1;
+		else if (string[i] == '*' && ++i)
+				tokkens->asterix = 1;
+		else if((tokkens->error = 1))
 			return(tokkens);
-		}
 	}
 	return(tokkens);
 }
