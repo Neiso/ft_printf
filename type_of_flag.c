@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 13:26:45 by douatla           #+#    #+#             */
-/*   Updated: 2020/01/29 19:08:26 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/09 12:00:43 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		character_arg(const char* string, va_list list_arg, s_tokken *tokkens)
 {
-	int i;
+	int bool;
 	char value[2];
 	char *return_value;
 
@@ -23,16 +23,19 @@ int		character_arg(const char* string, va_list list_arg, s_tokken *tokkens)
 		tokkens->adjustment = va_arg(list_arg, int);
 	value[0] = va_arg(list_arg, int);
 	value[1] = '\0';
+	bool = 1;
+	tokkens->precision = 0;
 	if (value[0] == 0)
 	{
+		tokkens->precision_number = tokkens->precision_number - 1;
+		tokkens->adjustment = tokkens->adjustment - 1;
 		return_value = read_tokkens_struct(tokkens, value, list_arg, CHARACTER);
 		count_character_for_return (tokkens, value);
-		i = -1;
-		while(++i != tokkens->adjustment - 1)
-			write(1, &return_value[i], 1);
-		write(1, &"\0", 1);
 		if (tokkens->adjustment == 0)
 			tokkens->adjustment = 1;
+		if (tokkens->left == 1 && !(bool = 0))
+			write(1, "\0", 1);
+		write(1, return_value, ft_strlen(return_value) + bool);
 	}
 	else
 	{
@@ -49,6 +52,12 @@ int		string_arg(const char* string, va_list list_arg, s_tokken *tokkens)
 	(void) string;
 	if (tokkens->asterix == 1)
 		tokkens->adjustment = va_arg(list_arg, int);
+	if (tokkens->asterix_2 == 1)
+		tokkens->precision_number = va_arg(list_arg, int);
+	if (tokkens->adjustment < 0 && (tokkens->left = 1))
+		tokkens->adjustment = -tokkens->adjustment;
+	if (tokkens->precision_number < 0)
+		tokkens->precision = 0;
 	value = va_arg(list_arg, char*);
 	if (value == NULL)
 		value = "(null)";
@@ -59,6 +68,7 @@ int		string_arg(const char* string, va_list list_arg, s_tokken *tokkens)
 	write(1, value, ft_strlen(value));
 	return (1);
 }
+
 int		int_decimal_arg(const char *string, va_list list_arg, s_tokken *tokkens)
 {
 	int value;
@@ -67,6 +77,12 @@ int		int_decimal_arg(const char *string, va_list list_arg, s_tokken *tokkens)
 	(void) string;
 	if (tokkens->asterix == 1)
 		tokkens->adjustment = va_arg(list_arg, int);
+	if (tokkens->asterix_2 == 1)
+		tokkens->precision_number = va_arg(list_arg, int);
+	if (tokkens->adjustment < 0 && (tokkens->left = 1))
+		tokkens->adjustment = -tokkens->adjustment;
+	if (tokkens->precision_number < 0)
+		tokkens->precision = 0;
 	value = va_arg(list_arg, int);
 	if (value == 0 && tokkens->precision == 1 && tokkens->precision_number == 0)
 	{
@@ -89,6 +105,12 @@ int		unsigned_int_decimal_arg(const char* string, va_list list_arg, s_tokken *to
 	(void) string;
 	if (tokkens->asterix == 1)
 		tokkens->adjustment = va_arg(list_arg, int);
+	if (tokkens->asterix_2 == 1)
+		tokkens->precision_number = va_arg(list_arg, int);
+	if (tokkens->adjustment < 0 && (tokkens->left = 1))
+		tokkens->adjustment = -tokkens->adjustment;
+	if (tokkens->precision_number < 0)
+		tokkens->precision = 0;
 	value = va_arg(list_arg, unsigned int);
 	if (value == 0 && tokkens->precision == 1 && tokkens->precision_number == 0)
 	{
@@ -111,6 +133,12 @@ int		unsigned_hexadecimal_arg(const char* string, va_list list_arg, s_tokken *to
 	(void) string;
 	if (tokkens->asterix == 1)
 		tokkens->adjustment = va_arg(list_arg, int);
+	if (tokkens->asterix_2 == 1)
+		tokkens->precision_number = va_arg(list_arg, int);
+	if (tokkens->adjustment < 0 && (tokkens->left = 1))
+		tokkens->adjustment = -tokkens->adjustment;
+	if (tokkens->precision_number < 0)
+		tokkens->precision = 0;
 	value = va_arg(list_arg, unsigned int);
 	if (value == 0 && tokkens->precision == 1 && tokkens->precision_number == 0)
 	{

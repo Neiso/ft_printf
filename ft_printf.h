@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:50:07 by douatla           #+#    #+#             */
-/*   Updated: 2020/01/24 16:57:36 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/09 11:57:29 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # define HEXA_X 7
 # define POURCENT 8
 # define EMPTY_STRING -1
-# define FLAG "cspdiuxX%"
+# define FLAG "cspdiuxX%/"
+# define FLAGTOKKEN "0123456789*-."
 
 typedef struct  s_tokken_int
 {
@@ -45,9 +46,11 @@ typedef struct  s_tokken
 	int             adjustment;
 	int             left; //if == 0 so its adjust right
 	int             precision;
-	int				precision_zero;
 	int             precision_number;
-	int             asterix;
+	int				precision_zero;
+	int				precision_zero_number;
+	int             asterix; //asterix for adjust
+	int             asterix_2; //asterix for precision
 	int             error;
 	char			tokken;
 	s_tokken_string string_tokken;
@@ -116,8 +119,9 @@ int		pourcent_arg(const char* string, va_list list_arg, s_tokken *tokkens);
 **      ===============
 */
 
-char    *ft_itoa_unsigned(unsigned int n);
+char    *ft_itoa_unsigned(unsigned long int n);
 char	*ft_itoa_base16(unsigned int n);
+char	*ft_itoa_base16_long(unsigned long int n);
 
 /*
 **-------------------------------------------------------------------

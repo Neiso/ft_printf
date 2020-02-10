@@ -6,19 +6,19 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 13:26:48 by djulian           #+#    #+#             */
-/*   Updated: 2020/01/24 17:05:29 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/08 20:38:32 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char    *ft_itoa_unsigned(unsigned int n)
+char    *ft_itoa_unsigned(unsigned long int n)
 {
 	int     i;
 	char    *str;
-	long    tmp;
+	unsigned long int   tmp;
 
-	tmp = (long)n;
+	tmp = n;
 	i = 1;
 	while ((tmp = tmp / 10))
 		i++;
@@ -44,6 +44,32 @@ char	*ft_itoa_base16(unsigned int n)
 {
 	int 				i;
 	unsigned int		tmp;
+	char 	*base;
+	char 	*string;
+
+	if (n == 0)
+		return ("0");
+	base = "0123456789abcdef";
+	tmp = n;
+	i = 1;
+	while ((tmp = tmp/16))
+		i++;
+	if (!(string = (char*)malloc(i + 1)))
+		return(NULL);
+	string[i] = '\0';
+	while (n)
+	{
+		string[i - 1] = base[n % 16];
+		n = n / 16;
+		i--;
+	}
+	return (string);
+}
+
+char	*ft_itoa_base16_long(unsigned long int n)
+{
+	int 				i;
+	unsigned long int		tmp;
 	char 	*base;
 	char 	*string;
 

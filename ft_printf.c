@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:45:00 by douatla           #+#    #+#             */
-/*   Updated: 2020/01/07 16:07:19 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/09 11:30:18 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int		ft_printf(const char *string, ...)
 			while (string[i] != '\0' && (string[i] <= 97 || string[i] >= 122) && string[i] != 88 && string[i] != '%')
 				i++;
 			i++;
+		}
+		if (string[i] == '%' && ++i)
+		{
+			while((string[i] >= '0' && string[i] <= '9') || string[i] == '-' || string[i] == '*' || string[i] == '.')
+				i++;
 		}
 		if (string[i] != '\0')
 		{

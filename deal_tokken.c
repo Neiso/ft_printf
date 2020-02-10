@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 12:01:33 by djulian           #+#    #+#             */
-/*   Updated: 2020/01/24 17:29:23 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/09 12:05:59 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*tokkens_int_precision(char *value, int precision_number, int precision)
 	if (value[0] == '-')
 	{
 		value_copy = ft_substr(value, 1, ft_strlen(value));
-		if(!(value = (char*)malloc(precision_number + 1)))
+		if(!(value = (char*)malloc(precision_number + 2)))
 			return (NULL);
 		value[0] = '-';
 		i = 0;
@@ -105,18 +105,34 @@ char	*tokkens_preci_zero_string(s_tokken *tokkens, char *value)
 	zero = NULL;
 	if (tokkens->precision_number > 6)
 	{
-		if(!(zero = (char*)malloc(tokkens->precision_number - 6) + 1))
+		if(!(zero = (char*)malloc((tokkens->precision_number - 6) + 1)))
 			return (NULL);
 		i = -1;
 		while (++i != tokkens->precision_number - 6)
 			zero[i] = '0';
 		zero[i] = '\0';
-	}
-	if (tokkens->precision_number > 6)
-	{
 		value = ft_strjoin(zero, value);
-		// free(zero);
+		free(zero);
 	}
+	return (value);
+}
+
+char	*tokken_precision_pointer(char *value, int precision_number, int precision)
+{
+	int i;
+	char *value_cpy;
+	int len;
+
+	i = 0;
+	while(value[i] != 'x')
+		i++;
+	value_cpy = ft_substr(value, ++i, ft_strlen(value));
+	value = "0x";
+	len = precision_number - ft_strlen(value_cpy);
+	i = -1;
+	while (++i < len)
+		value = ft_strjoin(value, "0");
+	value = ft_strjoin(value, value_cpy);
 	return (value);
 }
 
@@ -129,7 +145,11 @@ char    *read_tokkens_struct(s_tokken *tokkens, char *value, va_list arg, int fl
 	}
 	if (tokkens->precision == 1 && flag == STRING)
 		value = tokken_precision_string(tokkens->precision_number, value, tokkens);
-	if ((tokkens->precision == 1 || tokkens->precision_zero == 1)&& (flag == INT_D || flag == POURCENT) && tokkens->precision_number != 0)
+	if (tokkens->precision == 1 && flag == POINTER)
+		value = tokken_precision_pointer(value, tokkens->precision_number, tokkens->precision);
+	if (tokkens->precision == 1 && flag != STRING && flag != POINTER)
+		value = tokkens_int_precision(value, tokkens->precision_number, tokkens->precision);
+	if (tokkens->precision_zero == 1 && tokkens->left == 0 && flag != STRING)
 		value = tokkens_int_precision(value, tokkens->precision_number, tokkens->precision);
 	if (tokkens->adjustment != 0)
 		value = tokkens_adjustement(tokkens->adjustment, value, tokkens->left);
