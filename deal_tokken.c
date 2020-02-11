@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 12:01:33 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/09 12:05:59 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:35:39 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,11 +145,11 @@ char    *read_tokkens_struct(s_tokken *tokkens, char *value, va_list arg, int fl
 	}
 	if (tokkens->precision == 1 && flag == STRING)
 		value = tokken_precision_string(tokkens->precision_number, value, tokkens);
-	if (tokkens->precision == 1 && flag == POINTER)
+	if ((tokkens->precision == 1 || tokkens->precision_zero == 1) && flag == POINTER)
 		value = tokken_precision_pointer(value, tokkens->precision_number, tokkens->precision);
 	if (tokkens->precision == 1 && flag != STRING && flag != POINTER)
 		value = tokkens_int_precision(value, tokkens->precision_number, tokkens->precision);
-	if (tokkens->precision_zero == 1 && tokkens->left == 0 && flag != STRING)
+	if (tokkens->precision_zero == 1 && tokkens->left == 0 && flag != STRING && flag != POINTER)
 		value = tokkens_int_precision(value, tokkens->precision_number, tokkens->precision);
 	if (tokkens->adjustment != 0)
 		value = tokkens_adjustement(tokkens->adjustment, value, tokkens->left);

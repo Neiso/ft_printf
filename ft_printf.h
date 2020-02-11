@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:50:07 by douatla           #+#    #+#             */
-/*   Updated: 2020/02/09 11:57:29 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/11 12:10:44 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 # define HEXA_x 6
 # define HEXA_X 7
 # define POURCENT 8
+
+# define MINUS_SIGN 9
+# define PRECISION 10
+# define ZERO 11
+
 # define EMPTY_STRING -1
 # define FLAG "cspdiuxX%/"
 # define FLAGTOKKEN "0123456789*-."
@@ -51,6 +56,7 @@ typedef struct  s_tokken
 	int				precision_zero_number;
 	int             asterix; //asterix for adjust
 	int             asterix_2; //asterix for precision
+	int             asterix_3; //asterix for zero
 	int             error;
 	char			tokken;
 	s_tokken_string string_tokken;
@@ -127,7 +133,7 @@ char	*ft_itoa_base16_long(unsigned long int n);
 **-------------------------------------------------------------------
 */
 
-s_tokken    *fill_tokken_struct(s_tokken *tokkens, const char *string, int flags);
+s_tokken    *fill_tokken_struct(s_tokken *tokkens, const char *string, int flags, va_list arg);
 s_tokken    *init_tokken(s_tokken *tokkens);
 void        print_tokken(s_tokken *tokkens);
 char    *read_tokkens_struct(s_tokken *tokkens, char *value, va_list arg, int flag);

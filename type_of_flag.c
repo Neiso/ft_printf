@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 13:26:45 by douatla           #+#    #+#             */
-/*   Updated: 2020/02/09 12:00:43 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:01:43 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,13 @@ int		int_decimal_arg(const char *string, va_list list_arg, s_tokken *tokkens)
 	if (tokkens->asterix == 1)
 		tokkens->adjustment = va_arg(list_arg, int);
 	if (tokkens->asterix_2 == 1)
-		tokkens->precision_number = va_arg(list_arg, int);
+		tokkens->precision_zero_number = va_arg(list_arg, int);
 	if (tokkens->adjustment < 0 && (tokkens->left = 1))
 		tokkens->adjustment = -tokkens->adjustment;
-	if (tokkens->precision_number < 0)
+	if (tokkens->precision_zero_number < 0)
 		tokkens->precision = 0;
+	else if (tokkens->precision_zero_number > 0)
+		tokkens->precision_number = tokkens->precision_zero_number;
 	value = va_arg(list_arg, int);
 	if (value == 0 && tokkens->precision == 1 && tokkens->precision_number == 0)
 	{
