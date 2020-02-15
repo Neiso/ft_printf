@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:50:07 by douatla           #+#    #+#             */
-/*   Updated: 2020/02/11 12:10:44 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/15 16:39:38 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define MINUS_SIGN 9
 # define PRECISION 10
 # define ZERO 11
+# define ADJUSTMENT 12
+# define ADJUST_ZERO 13
 
 # define EMPTY_STRING -1
 # define FLAG "cspdiuxX%/"
@@ -54,9 +56,6 @@ typedef struct  s_tokken
 	int             precision_number;
 	int				precision_zero;
 	int				precision_zero_number;
-	int             asterix; //asterix for adjust
-	int             asterix_2; //asterix for precision
-	int             asterix_3; //asterix for zero
 	int             error;
 	char			tokken;
 	s_tokken_string string_tokken;

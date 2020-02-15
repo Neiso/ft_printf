@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 12:01:33 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/10 16:35:39 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/15 19:38:07 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*tokkens_adjustement(int adjustement, char *value, int left)
 	return(value);
 }
 
-char	*tokkens_int_precision(char *value, int precision_number, int precision)
+char	*tokkens_int_precision(char *value, int precision_number, int precision, s_tokken *tokkens)
 {
 	char *value_copy;
 	int len;
@@ -54,6 +54,7 @@ char	*tokkens_int_precision(char *value, int precision_number, int precision)
 	if (ft_strlen(value) > precision_number)
 		return(value);
 	bool = (precision) ? -1 : 0;
+	bool = (tokkens->precision_zero_number < 0 && value[0] == '-') ? bool + 1: bool;
 	if (value[0] == '-')
 	{
 		value_copy = ft_substr(value, 1, ft_strlen(value));
@@ -148,9 +149,9 @@ char    *read_tokkens_struct(s_tokken *tokkens, char *value, va_list arg, int fl
 	if ((tokkens->precision == 1 || tokkens->precision_zero == 1) && flag == POINTER)
 		value = tokken_precision_pointer(value, tokkens->precision_number, tokkens->precision);
 	if (tokkens->precision == 1 && flag != STRING && flag != POINTER)
-		value = tokkens_int_precision(value, tokkens->precision_number, tokkens->precision);
+		value = tokkens_int_precision(value, tokkens->precision_number, tokkens->precision, tokkens);
 	if (tokkens->precision_zero == 1 && tokkens->left == 0 && flag != STRING && flag != POINTER)
-		value = tokkens_int_precision(value, tokkens->precision_number, tokkens->precision);
+		value = tokkens_int_precision(value, tokkens->precision_number, tokkens->precision, tokkens);
 	if (tokkens->adjustment != 0)
 		value = tokkens_adjustement(tokkens->adjustment, value, tokkens->left);
 	return(value);

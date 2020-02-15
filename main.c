@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:55:19 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/11 11:56:02 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/15 19:50:05 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,14 @@ int main(void)
 	int ret2 = 0;
 	static char *s_hidden = "hi low\0don't print me lol\0";
 
-	ret = ft_printf("%00*%\n" ,5);
-	ret =    printf("%00*%\n" ,5);
+	ret = ft_printf("%0*%\n" ,17);
+	ret2 =   printf("%0*%\n" ,17);
 	// ret2 =   printf("%", '\0');
-	// printf("ret1 : %d\nret2 : %d\n", ret, ret);
+	// printf("\nret1 : %d\nret2 : %d\n", ret, ret2);
 	return (ret);
 }
+
+	// ret2 =   printf("%00*x\n" ,-186,3071966434u);
+	// ret = ft_printf("%00*x\n" ,-186,3071966434u);
+	// ret2 =   printf("%00*.22d\n" ,-174,1782663194);
+	// ret = ft_printf("%00*.22d\n" ,-174,1782663194);

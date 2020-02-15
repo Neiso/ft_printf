@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 13:26:48 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/08 20:38:32 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/15 17:38:32 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,11 @@ char	*ft_itoa_base16_long(unsigned long int n)
 
 void	count_character_for_return(s_tokken *tokkens, char *value)
 {
-	if (tokkens->adjustment == 0)
-		tokkens->adjustment = ft_strlen(value);
+	// if (tokkens->precision_number > tokkens->adjustment)
+	// 	tokkens->adjustment = ft_strlen(value);
+	// if (tokkens->adjustment == 0)
+	// 	tokkens->adjustment = ft_strlen(value);
+	tokkens->adjustment = ft_strlen(value);
 }
 
 int	find_pourcent_sign(const char *string, int index)

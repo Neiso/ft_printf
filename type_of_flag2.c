@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:45:56 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/11 15:54:00 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/15 19:51:00 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@ int		pointer_arg(const char* string, va_list list_arg, s_tokken *tokkens)
 	char *value_string;
 
 	(void) string;
-	if (tokkens->asterix == 1)
-		tokkens->adjustment = va_arg(list_arg, int);
-	if (tokkens->asterix_2 == 1)
-		tokkens->precision_zero_number = va_arg(list_arg, int);
 	if (tokkens->adjustment < 0 && (tokkens->left = 1))
 		tokkens->adjustment = -tokkens->adjustment;
 	if (tokkens->precision_zero_number < 0)
@@ -46,15 +42,17 @@ int		pourcent_arg(const char* string, va_list list_arg, s_tokken *tokkens)
 {
 	(void)string;
 	char *value;
-
-	if (tokkens->asterix == 1)
-		tokkens->adjustment = va_arg(list_arg, int);
-	if (tokkens->asterix_3 == 1 && (tokkens->precision_zero = 1))
-		tokkens->precision_number = va_arg(list_arg, int);
+	
+	if (tokkens->adjustment < 0 && (tokkens->left = 1))
+		tokkens->adjustment *= -1;
+	if (tokkens->precision_zero == 1)
+		tokkens->precision_number = tokkens->adjustment;
 	tokkens->precision = 0;
-	if (tokkens->precision_number > 0 && tokkens->precision_zero == 0)
-		tokkens->precision_number += 1;
+	if (tokkens->precision_zero_number < 0)
+		tokkens->precision_zero = 1;
 	value = tokkens->tokken == '%' ? "%\0" : "\0";
+	// print_tokken(tokkens);
+	// printf("VALUE IS : %s\n", value);
 	value = read_tokkens_struct(tokkens, value, NULL, POURCENT);
 	count_character_for_return (tokkens, value);
 	write(1, value, ft_strlen(value));

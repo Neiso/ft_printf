@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 10:56:54 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/11 12:08:52 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/15 19:28:57 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int    deal_with_arg(const char *string, va_list list_arg)
 		tokkens.tokken = FLAG[flag];
 		fill_tokken_struct(&tokkens, string, flag, list_arg);
 		// print_tokken(&tokkens);
+		if (tokkens.precision_zero_number < 0)
+			tokkens.precision_number = tokkens.adjustment;
 		if (tokkens.error != 0)
 			return (0);
 		flag_list[flag](string, list_arg, &tokkens);
@@ -80,5 +82,5 @@ int    deal_with_arg(const char *string, va_list list_arg)
         return (0);
 	if (tokkens.string_tokken.empty_string && tokkens.adjustment == 0)
 		return(EMPTY_STRING);
-    return (tokkens.adjustment);
+	return (tokkens.adjustment);
 }
