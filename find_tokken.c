@@ -6,13 +6,13 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 09:05:24 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/15 19:51:17 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/16 20:03:12 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void        print_tokken(s_tokken *tokkens)
+void        print_tokken(t_tokken *tokkens)
 {
 	printf("\nADJUSTMENT :\t\t%d\n", tokkens->adjustment);
 	printf("LEFT :\t\t\t%d\n", tokkens->left);
@@ -27,7 +27,7 @@ void        print_tokken(s_tokken *tokkens)
 	printf("\n");
 }
 
-s_tokken    *init_tokken(s_tokken *tokkens)
+t_tokken    *init_tokken(t_tokken *tokkens)
 {
 	tokkens->adjustment = 0;
 	tokkens->left = 0;
@@ -42,7 +42,7 @@ s_tokken    *init_tokken(s_tokken *tokkens)
 	return (tokkens);
 }
 
-int		string_arg_preci_zero(s_tokken *tokkens,const char *string, int pos)
+int		string_arg_preci_zero(t_tokken *tokkens,const char *string, int pos)
 {
 	int tmp;
 	
@@ -56,7 +56,7 @@ int		string_arg_preci_zero(s_tokken *tokkens,const char *string, int pos)
 }
 
 
-int		asterix_tokken(s_tokken *tokkens, const char *string, va_list arg, int tokken)
+int		asterix_tokken(t_tokken *tokkens, const char *string, va_list arg, int tokken)
 {
 	if (tokken == PRECISION && tokkens->precision_zero == 1)
 	{
@@ -89,7 +89,7 @@ int		asterix_tokken(s_tokken *tokkens, const char *string, va_list arg, int tokk
 }
 
 
-int		pre_fill_tokken_struct(s_tokken *tokkens, const char *string, char flag, va_list arg)
+int		pre_fill_tokken_struct(t_tokken *tokkens, const char *string, char flag, va_list arg)
 {
 	int i;
 	int tmp;
@@ -125,7 +125,7 @@ int		pre_fill_tokken_struct(s_tokken *tokkens, const char *string, char flag, va
 	return i;
 }
 
-s_tokken    *fill_tokken_struct(s_tokken *tokkens, const char *string, int flags, va_list arg)
+t_tokken    *fill_tokken_struct(t_tokken *tokkens, const char *string, int flags, va_list arg)
 {
 	int     i;
 	int     tmp;

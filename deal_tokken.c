@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 12:01:33 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/15 19:38:07 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/16 20:02:35 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*tokkens_adjustement(int adjustement, char *value, int left)
 	return(value);
 }
 
-char	*tokkens_int_precision(char *value, int precision_number, int precision, s_tokken *tokkens)
+char	*tokkens_int_precision(char *value, int precision_number, int precision, t_tokken *tokkens)
 {
 	char *value_copy;
 	int len;
@@ -86,7 +86,7 @@ char	*tokkens_int_precision(char *value, int precision_number, int precision, s_
 
 
 
-char	*tokken_precision_string(int precision_number, char *value, s_tokken *tokkens)
+char	*tokken_precision_string(int precision_number, char *value, t_tokken *tokkens)
 {
 	if (precision_number == 0)
 	{
@@ -98,7 +98,7 @@ char	*tokken_precision_string(int precision_number, char *value, s_tokken *tokke
 	return (ft_substr((const char*)value, 0, precision_number));
 }
 
-char	*tokkens_preci_zero_string(s_tokken *tokkens, char *value)
+char	*tokkens_preci_zero_string(t_tokken *tokkens, char *value)
 {
 	char	*zero;
 	int		i;
@@ -137,7 +137,7 @@ char	*tokken_precision_pointer(char *value, int precision_number, int precision)
 	return (value);
 }
 
-char    *read_tokkens_struct(s_tokken *tokkens, char *value, va_list arg, int flag)
+char    *read_tokkens_struct(t_tokken *tokkens, char *value, va_list arg, int flag)
 {
 	if (tokkens->string_tokken.precision_zero_string == 1)
 	{

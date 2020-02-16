@@ -6,13 +6,13 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 13:26:45 by douatla           #+#    #+#             */
-/*   Updated: 2020/02/15 19:28:35 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/16 20:08:46 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		character_arg(const char* string, va_list list_arg, s_tokken *tokkens)
+int		character_arg(const char* string, va_list list_arg, t_tokken *tokkens)
 {
 	int bool;
 	char value[2];
@@ -45,7 +45,7 @@ int		character_arg(const char* string, va_list list_arg, s_tokken *tokkens)
 	}
 	return (0);
 }
-int		string_arg(const char* string, va_list list_arg, s_tokken *tokkens)
+int		string_arg(const char* string, va_list list_arg, t_tokken *tokkens)
 {
 	char *value;
 
@@ -65,7 +65,7 @@ int		string_arg(const char* string, va_list list_arg, s_tokken *tokkens)
 	return (1);
 }
 
-int		int_decimal_arg(const char *string, va_list list_arg, s_tokken *tokkens)
+int		int_decimal_arg(const char *string, va_list list_arg, t_tokken *tokkens)
 {
 	int value;
 	char *value_string;
@@ -91,7 +91,7 @@ int		int_decimal_arg(const char *string, va_list list_arg, s_tokken *tokkens)
 	return (1);
 }
 
-int		unsigned_int_decimal_arg(const char* string, va_list list_arg, s_tokken *tokkens)
+int		unsigned_int_decimal_arg(const char* string, va_list list_arg, t_tokken *tokkens)
 {
 	unsigned int	value;
 	char*			value_string;
@@ -116,7 +116,7 @@ int		unsigned_int_decimal_arg(const char* string, va_list list_arg, s_tokken *to
 	return (1);
 }
 
-int		unsigned_hexadecimal_arg(const char* string, va_list list_arg, s_tokken *tokkens)
+int		unsigned_hexadecimal_arg(const char* string, va_list list_arg, t_tokken *tokkens)
 {
 	int value;
 	char *value_string;
@@ -135,7 +135,7 @@ int		unsigned_hexadecimal_arg(const char* string, va_list list_arg, s_tokken *to
 	else
 		value_string = ft_itoa_base16(value);
 	if (tokkens->tokken == 'X')
-		value_string = toupper_X(value_string);
+		value_string = toupper_x(value_string);
 	if (value_string == NULL)
 		return(0);
 	// print_tokken(tokkens);

@@ -6,13 +6,13 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:45:56 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/15 19:51:00 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/16 20:03:38 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		pointer_arg(const char* string, va_list list_arg, s_tokken *tokkens)
+int		pointer_arg(const char* string, va_list list_arg, t_tokken *tokkens)
 {
 	unsigned long int value;
 	char *value_string;
@@ -38,7 +38,7 @@ int		pointer_arg(const char* string, va_list list_arg, s_tokken *tokkens)
 	return (0);
 }
 
-int		pourcent_arg(const char* string, va_list list_arg, s_tokken *tokkens)
+int		pourcent_arg(const char* string, va_list list_arg, t_tokken *tokkens)
 {
 	(void)string;
 	char *value;

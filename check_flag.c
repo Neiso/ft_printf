@@ -6,13 +6,13 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 10:56:54 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/15 19:28:57 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/16 20:04:18 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int (*flag_list[9])(const char *string, va_list list_arg, s_tokken *tokkens) =
+int (*flag_list[9])(const char *string, va_list list_arg, t_tokken *tokkens) =
 {
 	character_arg,
 	string_arg,
@@ -47,7 +47,7 @@ int		type_of_arg(const char *str)
 	else if (str[i] == 'u')
 		return (UNSI_INT);
 	else if (str[i] == 'x')
-		return (HEXA_x);
+		return (HEXA_XS);
 	else if (str[i] == 'X')
 		return (HEXA_X);
 	else if (str[i] == '%')
@@ -61,7 +61,7 @@ int    deal_with_arg(const char *string, va_list list_arg)
     char pourcent;
 	int flag;
 	int ret;
-	s_tokken tokkens;
+	t_tokken tokkens;
 
     pourcent = '%';
 	ret = 0;
