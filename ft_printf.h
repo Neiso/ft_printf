@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:50:07 by douatla           #+#    #+#             */
-/*   Updated: 2020/02/16 20:12:45 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/20 14:30:23 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,21 @@ typedef struct	s_tokken
 	int				precision_number;
 	int				precision_zero;
 	int				precision_zero_number;
-	int				error;
 	char			tokken;
 	t_tokken_string	string_tokken;
 }				t_tokken;
+
+typedef struct	s_flag
+{
+	int				adjust;
+	int				left;
+	int				preci;
+	int				preci_val;
+	int				preci_zero;
+	int				preci_zero_val;
+	char			tokken;
+	t_tokken_string	string_tokken;
+}				t_flag;
 
 /*
 **      ===================
@@ -97,8 +108,8 @@ int				type_of_arg(const char *str);
 int				character_arg(const char *string, va_list list_arg, t_tokken *tokkens);
 int				string_arg(const char *string, va_list list_arg, t_tokken *tokkens);
 int				int_decimal_arg(const char *string, va_list list_arg, t_tokken *tokkens);
-int				unsigned_int_decimal_arg(const char *string, va_list list_arg, t_tokken *tokkens);
-int				unsigned_hexadecimal_arg(const char *string, va_list list_arg, t_tokken *tokkens);
+int				unsigned_int_arg(const char *string, va_list list_arg, t_tokken *tokkens);
+int				unsigned_hexa_arg(const char *string, va_list list_arg, t_tokken *tokkens);
 
 /*
 **-------------------------------------------------------------------
@@ -131,10 +142,10 @@ char			*ft_itoa_base16_long(unsigned long int n);
 **-------------------------------------------------------------------
 */
 
-t_tokken		*fill_tokken_struct(t_tokken *tokkens, const char *string, int flags, va_list arg);
+t_tokken		*fill_struct(t_tokken *tokkens, char *string, int flags, va_list arg);
 t_tokken		*init_tokken(t_tokken *tokkens);
 void			print_tokken(t_tokken *tokkens);
-char			*read_tokkens_struct(t_tokken *tokkens, char *value, va_list arg, int flag);
+char			*read_tokkens_struct(t_tokken *tokkens, char *value, int flag);
 char			*tokkens_precision(int precision_number, char *value);
 void			count_character_for_return (t_tokken *tokkens, char *value);
 int				find_minus_sign(const char *string, int index, int *ret);
