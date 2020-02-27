@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 13:26:48 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/19 23:22:56 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/25 20:53:59 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_itoa_base16(unsigned int n)
 	char			*string;
 
 	if (n == 0)
-		return ("0");
+		return (ft_strjoin("0", ""));
 	base = "0123456789abcdef";
 	tmp = n;
 	i = 1;
@@ -74,7 +74,7 @@ char	*ft_itoa_base16_long(unsigned long int n)
 	char				*string;
 
 	if (n == 0)
-		return ("0");
+		return (ft_strjoin("0", ""));
 	base = "0123456789abcdef";
 	tmp = n;
 	i = 1;
@@ -92,12 +92,12 @@ char	*ft_itoa_base16_long(unsigned long int n)
 	return (string);
 }
 
-void	count_character_for_return(t_tokken *tokkens, char *value)
+void	count_character_for_return(t_flag *flags, char *value)
 {
-	if (tokkens->tokken == 'c' && tokkens->adjustment != 0)
+	if (flags->tokken == 'c' && flags->adjust != 0)
 		return ;
 	else
-		tokkens->adjustment = ft_strlen(value);
+		flags->adjust = ft_strlen(value);
 }
 
 char	*toupper_x(char *value_string)

@@ -6,13 +6,13 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 10:56:54 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/20 14:33:31 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/26 21:30:23 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int (*g_tokken_list[9])(const char *string, va_list arg, t_tokken *tokkens) =
+int (*g_tokken_list[9])(const char *string, va_list arg, t_flag *flag) =
 {
 	character_arg,
 	string_arg,
@@ -56,24 +56,25 @@ int		type_of_arg(const char *str)
 
 int		deal_with_arg(const char *string, va_list list_arg)
 {
-	int			flag;
+	int			tokken;
 	int			ret;
-	t_tokken	tokkens;
+	t_flag		flag;
 
 	ret = 0;
-	flag = type_of_arg(string);
-	if (flag != -1)
+	tokken = type_of_arg(string);
+	if (tokken != -1)
 	{
-		init_tokken(&tokkens);
-		tokkens.tokken = FLAG[flag];
-		fill_struct(&tokkens, (char *)string, flag, list_arg);
-		if (tokkens.precision_zero_number < 0)
-			tokkens.precision_number = tokkens.adjustment;
-		g_tokken_list[flag](string, list_arg, &tokkens);
+		init_tokken(&flag);
+		flag.tokken = FLAG[tokken];
+		fill_struct(&flag, (char *)string, tokken, list_arg);
+		if (flag.preci_zero_val < 0)
+			flag.preci_val = flag.adjust;
+		if (!(g_tokken_list[tokken](string, list_arg, &flag)))
+			return (-2);
 	}
-	else if (flag == -1)
+	else if (tokken == -1)
 		return (0);
-	if (tokkens.string_tokken.empty_string && tokkens.adjustment == 0)
+	if (flag.string_tokken.empty_string && flag.adjust == 0)
 		return (EMPTY_STRING);
-	return (tokkens.adjustment);
+	return (flag.adjust);
 }

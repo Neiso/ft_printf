@@ -17,8 +17,7 @@ FILE_O=$(FILE:.c=.o)
 BONUS_FILE_O=$(BONUS_FILE:.c=.o)
 
 $(NAME) :
-	${CC} -c  ${FILE}
-	ar rc libft.a $(FILE_O)
+	@ar rc libft.a $(FILE_O)
 clean :
 	${DEL} ${FILE_O} ${BONUS_FILE_O}
 

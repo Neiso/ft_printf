@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:45:00 by douatla           #+#    #+#             */
-/*   Updated: 2020/02/19 11:35:42 by douatla          ###   ########.fr       */
+/*   Updated: 2020/02/26 21:53:19 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int		ft_printf_tokken(const char *string, int *ret, int pos, int tmp)
 {
+	if (tmp == -2)
+		return (0);
 	if (++pos && tmp != EMPTY_STRING)
 		*ret += tmp;
 	while (string[pos] != '\0' && (string[pos] <= 97 ||
@@ -24,18 +26,20 @@ int		ft_printf_tokken(const char *string, int *ret, int pos, int tmp)
 
 int		ft_printf(const char *string, ...)
 {
-	va_list list_arg;
-	int		i;
-	int		ret;
-	int		tmp;
+	va_list			list_arg;
+	int				i;
+	static int		ret = 0;
+	int				tmp;
 
 	va_start(list_arg, string);
 	i = 0;
-	ret = 0;
 	while (string[i] != '\0')
 	{
 		while (string[i] == '%' && (tmp = deal_with_arg(&string[i], list_arg)))
-			i = ft_printf_tokken(string, &ret, i, tmp);
+		{
+			if (!(i = ft_printf_tokken(string, &ret, i, tmp)))
+				return (-1);
+		}
 		if (string[i] == '%' && ++i)
 		{
 			while ((string[i] >= '0' && string[i] <= '9') ||
