@@ -1,4 +1,16 @@
-GCC = gcc -Wall -Werror -Wextra
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: douatla <douatla@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/02/28 13:16:24 by douatla           #+#    #+#              #
+#    Updated: 2020/03/03 09:01:58 by douatla          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+GFLAG = gcc -Wall -Werror -Wextra
 
 LIBFT = libft
 
@@ -14,22 +26,28 @@ NAME = libftprintf.a
 
 DEL = rm -Rf
 
+
+%.o: %.c
+		gcc -Wall -Werror -Wextra -c -o $@ $<
+
+
 all : ${LIBFT} ${NAME}
 
 ${NAME}: ${FILES_O}
-	ar -rc libftprintf.a ./library/libft.a ${FILES_O}
+	ar -rc libftprintf.a ${FILES_O}
 
 ${LIBFT}:
 	@${MAKE} -C ./libft
-	@mv ./libft/libft.a ./library
-
+	cp ./libft/libft.a .
+	mv libft.a libftprintf.a
 
 clean :
 	${DEL} ${FILES_O}
-	${DEL} ./library/libft.a
+	${MAKE} clean -C ./libft
 
 fclean : clean
 	${DEL} ${NAME}
+	${MAKE} fclean -C ./libft
 
 re : fclean all
 
@@ -37,4 +55,4 @@ exec: ${LIBFT}
 	@gcc ${FILES} -Llib -lft -o ${EXEC}
 	@./ft_printf | cat -e
 
-.PHONY : ${LIBFT} ${NAME}
+.PHONY : ${LIBFT} ${NAME} all clean re fclean exec
