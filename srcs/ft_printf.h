@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:50:07 by douatla           #+#    #+#             */
-/*   Updated: 2020/02/26 22:39:31 by douatla          ###   ########.fr       */
+/*   Updated: 2020/03/03 09:09:28 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ t_flag			*fill_struct(t_flag *flags, char *str, int flag, va_list arg);
 **      ===================
 */
 
-char			*flags_adjustement(int adjustement, char *value, int left,
-					t_flag *flags);
+char			*flags_adjustement(int adjustement, char *value, int left);
 char			*flag_int_preci(char *val, int preci_val,
 					int preci, t_flag *flags);
 char			*flag_preci_string(int preci_val, char *value, t_flag *flags);

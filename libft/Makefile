@@ -14,8 +14,11 @@ BONUS_FILE_O=$(BONUS_FILE:.c=.o)
 
 all : ${FILE_O} ${NAME}
 
+%.o: %.c
+	gcc ${FLAGS} -c -o $@ $<
+
 $(NAME) :
-	@ar rc libft.a $(FILE_O)
+	@ar rcs libft.a $(FILE_O)
 
 clean :
 	${DEL} ${FILE_O} ${BONUS_FILE_O}
@@ -26,10 +29,10 @@ fclean : clean
 
 re : fclean all
 
-so :
-	gcc -c *.c
-	gcc -fPIC *.o -o libft.so
+# so :
+# 	gcc -c *.c
+# 	gcc -fPIC *.o -o libft.so
 
-bonus : ${BONUS_FILE}
-	gcc -c ${FLAGS} ${FILE} ${BONUS_FILE_0}
-	ar rc libft.a $(BONUS_FILE_O)
+# bonus : ${BONUS_FILE}
+# 	gcc -c ${FLAGS} ${FILE} ${BONUS_FILE_0}
+# 	ar rc libft.a $(BONUS_FILE_O)

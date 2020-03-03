@@ -6,13 +6,13 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 12:01:33 by djulian           #+#    #+#             */
-/*   Updated: 2020/02/26 22:16:47 by douatla          ###   ########.fr       */
+/*   Updated: 2020/03/03 09:09:20 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*flags_adjustement(int adjust, char *value, int left, t_flag *flags)
+char	*flags_adjustement(int adjust, char *value, int left)
 {
 	int		i;
 	int		len;
@@ -127,7 +127,7 @@ char	*read_flags_struct(t_flag *flags, char *value, int flag)
 	if (value == NULL)
 		return (0);
 	if (flags->adjust != 0)
-		value = flags_adjustement(flags->adjust, value, flags->left, flags);
+		value = flags_adjustement(flags->adjust, value, flags->left);
 	if (value == NULL)
 		return (0);
 	return (value);

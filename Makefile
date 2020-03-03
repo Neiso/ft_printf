@@ -6,7 +6,7 @@
 #    By: douatla <douatla@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/28 13:16:24 by douatla           #+#    #+#              #
-#    Updated: 2020/03/03 09:01:58 by douatla          ###   ########.fr        #
+#    Updated: 2020/03/03 09:25:15 by douatla          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,15 +26,13 @@ NAME = libftprintf.a
 
 DEL = rm -Rf
 
-
-%.o: %.c
-		gcc -Wall -Werror -Wextra -c -o $@ $<
-
-
 all : ${LIBFT} ${NAME}
 
+%.o: %.c
+		${GFLAG} -I ./srcs -c -o $@ $<
+
 ${NAME}: ${FILES_O}
-	ar -rc libftprintf.a ${FILES_O}
+	ar -rcs libftprintf.a ${FILES_O}
 
 ${LIBFT}:
 	@${MAKE} -C ./libft
