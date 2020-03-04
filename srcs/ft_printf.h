@@ -6,7 +6,7 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:50:07 by douatla           #+#    #+#             */
-/*   Updated: 2020/03/04 10:43:42 by douatla          ###   ########.fr       */
+/*   Updated: 2020/03/04 15:03:57 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 # include <unistd.h>
 # include <stdarg.h>
-# include "../../libft.h"
+# include "../../includes/libft.h"
 # define CHARACTER 0
 # define STRING 1
 # define POINTER 2
