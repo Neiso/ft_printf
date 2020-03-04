@@ -6,7 +6,7 @@
 #    By: douatla <douatla@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/28 13:16:24 by douatla           #+#    #+#              #
-#    Updated: 2020/03/04 14:30:11 by douatla          ###   ########.fr        #
+#    Updated: 2020/03/04 14:50:54 by douatla          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FILES = srcs/func_utiles.c srcs/func_utiles_2.c srcs/find_tokken.c srcs/deal_tok
 
 FILES_O = ${FILES:.c=.o}
 
-HEADER = ft_printf.h
+HEADER = ./srcs/ft_printf.h
 
 EXEC = ft_printf
 
@@ -33,7 +33,7 @@ NO_COLOR = \033[0m
 all : ${NAME}
 
 %.o: %.c ${HEADER}
-	@${GFLAG} -I ./srcs -c -o $@ $<	
+	@${GFLAG} -c -o $@ $<	
 
 ${NAME}: ${FILES_O}
 	@ar -rcs ${LIBFT} ${FILES_O}
@@ -43,9 +43,5 @@ clean :
 	@${DEL} ${FILES_O}
 
 re : all
-
-exec: ${LIBFT}
-	@gcc ${FILES} -L.. -lft -o ${EXEC}
-	@./ft_printf | cat -e
 
 .PHONY : ${NAME} all clean re fclean exec
