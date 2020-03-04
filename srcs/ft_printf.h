@@ -6,16 +6,15 @@
 /*   By: douatla <douatla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:50:07 by douatla           #+#    #+#             */
-/*   Updated: 2020/03/03 09:09:28 by douatla          ###   ########.fr       */
+/*   Updated: 2020/03/04 10:43:42 by douatla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include <stdio.h>
 # include <unistd.h>
 # include <stdarg.h>
-# include "../libft/libft.h"
+# include "../../libft.h"
 # define CHARACTER 0
 # define STRING 1
 # define POINTER 2

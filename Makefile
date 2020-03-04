@@ -6,13 +6,13 @@
 #    By: douatla <douatla@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/28 13:16:24 by douatla           #+#    #+#              #
-#    Updated: 2020/03/03 09:25:15 by douatla          ###   ########.fr        #
+#    Updated: 2020/03/04 14:30:11 by douatla          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 GFLAG = gcc -Wall -Werror -Wextra
 
-LIBFT = libft
+LIBFT = ../libft.a
 
 FILES = srcs/func_utiles.c srcs/func_utiles_2.c srcs/find_tokken.c srcs/deal_tokken.c srcs/check_flag.c srcs/type_of_flag.c srcs/type_of_flag2.c srcs/ft_printf.c 
 
@@ -26,31 +26,26 @@ NAME = libftprintf.a
 
 DEL = rm -Rf
 
-all : ${LIBFT} ${NAME}
+YELLOW = \033[0;33m
 
-%.o: %.c
-		${GFLAG} -I ./srcs -c -o $@ $<
+NO_COLOR = \033[0m
+
+all : ${NAME}
+
+%.o: %.c ${HEADER}
+	@${GFLAG} -I ./srcs -c -o $@ $<	
 
 ${NAME}: ${FILES_O}
-	ar -rcs libftprintf.a ${FILES_O}
-
-${LIBFT}:
-	@${MAKE} -C ./libft
-	cp ./libft/libft.a .
-	mv libft.a libftprintf.a
+	@ar -rcs ${LIBFT} ${FILES_O}
+	@python3 -c 'print("${YELLOW}Ft_printf compiled with success.${NO_COLOR}\n")'
 
 clean :
-	${DEL} ${FILES_O}
-	${MAKE} clean -C ./libft
+	@${DEL} ${FILES_O}
 
-fclean : clean
-	${DEL} ${NAME}
-	${MAKE} fclean -C ./libft
-
-re : fclean all
+re : all
 
 exec: ${LIBFT}
-	@gcc ${FILES} -Llib -lft -o ${EXEC}
+	@gcc ${FILES} -L.. -lft -o ${EXEC}
 	@./ft_printf | cat -e
 
-.PHONY : ${LIBFT} ${NAME} all clean re fclean exec
+.PHONY : ${NAME} all clean re fclean exec
